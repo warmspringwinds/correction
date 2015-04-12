@@ -1,3 +1,8 @@
+# cython: cdivision=True
+# cython: boundscheck=False
+# cython: nonecheck=False
+# cython: wraparound=False
+
 import numpy as np
 cimport numpy as cnp
  
@@ -74,4 +79,5 @@ def get_scale_local_maximas_cython(cnp.int_t[:, ::1] cube_coordinates, cnp.ndarr
                 continue
  
     # Return only accepted points
-    return np.asarray(cube_coordinates[accepted_points_index])
+    output = np.asarray(cube_coordinates)
+    return output[accepted_points_index]
