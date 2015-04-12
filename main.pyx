@@ -5,9 +5,9 @@
 
 import numpy as np
 cimport numpy as cnp
+
  
- 
-def get_scale_local_maximas_cython(cnp.int_t[:, ::1] cube_coordinates, cnp.ndarray[cnp.double_t, ndim=3] laplacian_cube):
+def get_scale_local_maximas_cython(cnp.int_t[:, ::1] cube_coordinates, cnp.double_t[:, :, ::1] laplacian_cube):
     """
     Check provided cube coordinate for scale space local maximas.
     Returns only the points that satisfy the criteria.
@@ -51,7 +51,7 @@ def get_scale_local_maximas_cython(cnp.int_t[:, ::1] cube_coordinates, cnp.ndarr
     cdef Py_ssize_t amount_of_points = cube_coordinates.shape[0]
  
     # Preallocate index. Fill it with False.
-    accepted_points_index = np.ones(amount_of_points, dtype=bool)
+    cdef cnp.int_t[::1] accepted_points_index = np.ones(amount_of_points, dtype=bool)
  
     for point_index in range(amount_of_points):
  
