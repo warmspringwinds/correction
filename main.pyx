@@ -63,15 +63,15 @@ def get_scale_local_maximas_cython(cnp.int_t[:, ::1] cube_coordinates, cnp.ndarr
         if point_layer != 0:
             lower_point_response = laplacian_cube[y_coord, x_coord, point_layer-1]
             if lower_point_response >= point_response:
-                accepted_points_index[point_index] = False
+                accepted_points_index[point_index] = 0
                 continue
  
         # Check the point above the current one
         if point_layer != (amount_of_layers-1):
             upper_point_response = laplacian_cube[y_coord, x_coord, point_layer+1]
             if upper_point_response >= point_response:
-                accepted_points_index[point_index] = False
+                accepted_points_index[point_index] = 0
                 continue
  
     # Return only accepted points
-    return cube_coordinates[accepted_points_index]
+    return np.asarray(cube_coordinates[accepted_points_index])

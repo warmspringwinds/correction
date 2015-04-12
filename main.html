@@ -366,8 +366,8 @@ body.cython { font-family: courier; font-size: 12; }
 </pre><pre class='cython line score-0'>&#xA0;02: <span class="k">cimport</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">cnp</span></pre>
 <pre class='cython line score-0'>&#xA0;03: </pre>
 <pre class='cython line score-0'>&#xA0;04: </pre>
-<pre class='cython line score-62' onclick='toggleDiv(this)'>+05: <span class="k">def</span> <span class="nf">get_scale_local_maximas_cython</span><span class="p">(</span><span class="n">cnp</span><span class="o">.</span><span class="n">int_t</span><span class="p">[:,</span> <span class="p">::</span><span class="mf">1</span><span class="p">]</span> <span class="n">cube_coordinates</span><span class="p">,</span> <span class="n">cnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">cnp</span><span class="o">.</span><span class="n">double_t</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mf">3</span><span class="p">]</span> <span class="n">laplacian_cube</span><span class="p">):</span></pre>
-<pre class='cython code score-62'>/* Python wrapper */
+<pre class='cython line score-63' onclick='toggleDiv(this)'>+05: <span class="k">def</span> <span class="nf">get_scale_local_maximas_cython</span><span class="p">(</span><span class="n">cnp</span><span class="o">.</span><span class="n">int_t</span><span class="p">[:,</span> <span class="p">::</span><span class="mf">1</span><span class="p">]</span> <span class="n">cube_coordinates</span><span class="p">,</span> <span class="n">cnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">cnp</span><span class="o">.</span><span class="n">double_t</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mf">3</span><span class="p">]</span> <span class="n">laplacian_cube</span><span class="p">):</span></pre>
+<pre class='cython code score-63'>/* Python wrapper */
 static PyObject *__pyx_pw_4main_1get_scale_local_maximas_cython(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static char __pyx_doc_4main_get_scale_local_maximas_cython[] = "\n    Check provided cube coordinate for scale space local maximas.\n    Returns only the points that satisfy the criteria.\n\n    A point is considered to be a local maxima if its value is greater\n    than the value of the point on the next scale level and the point\n    on the previous scale level. If the tested point is located on the\n    first scale level or on the last one, then only one inequality should\n    hold in order for this point to be local scale maxima.\n\n    Parameters\n    ----------\n    cube_coordinates : (n, 3) ndarray\n          A 2d array with each row representing 3 values, ``(y,x,scale_level)``\n          where ``(y,x)`` are coordinates of the blob and ``scale_level`` is the\n          position of a point in scale space.\n    laplacian_cube : ndarray of floats\n        Laplacian of Gaussian scale space. \n\n    Returns\n    -------\n    output : (n, 3) ndarray\n        cube_coordinates that satisfy the local maximum criteria in\n        scale space.\n\n    Examples\n    --------\n    &gt;&gt;&gt; one = np.array([[1, 2, 3], [4, 5, 6]])\n    &gt;&gt;&gt; two = np.array([[7, 8, 9], [10, 11, 12]])\n    &gt;&gt;&gt; three = np.array([[0, 0, 0], [0, 0, 0]])\n    &gt;&gt;&gt; check_coords = np.array([[1, 0, 1], [1, 0, 0], [1, 0, 2]])\n    &gt;&gt;&gt; lapl_dummy = np.dstack([one, two, three])\n    &gt;&gt;&gt; get_scale_local_maximas(check_coords, lapl_dummy)\n    array([[1, 0, 1]])\n    ";
 static PyMethodDef __pyx_mdef_4main_1get_scale_local_maximas_cython = {"get_scale_local_maximas_cython", (PyCFunction)__pyx_pw_4main_1get_scale_local_maximas_cython, METH_VARARGS|METH_KEYWORDS, __pyx_doc_4main_get_scale_local_maximas_cython};
@@ -470,6 +470,7 @@ static PyObject *__pyx_pf_4main_get_scale_local_maximas_cython(CYTHON_UNUSED PyO
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_4);
   __PYX_XDEC_MEMVIEW(&amp;__pyx_t_7, 1);
   __PYX_XDEC_MEMVIEW(&amp;__pyx_t_22, 1);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_23);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     <span class='pyx_c_api'>__Pyx_ErrFetch</span>(&amp;__pyx_type, &amp;__pyx_value, &amp;__pyx_tb);
     <span class='pyx_c_api'>__Pyx_SafeReleaseBuffer</span>(&amp;__pyx_pybuffernd_laplacian_cube.rcbuffer-&gt;pybuffer);
@@ -688,8 +689,8 @@ __PYX_XDEC_MEMVIEW(&amp;__pyx_v_interest_point_coords, 1);
 </pre><pre class='cython line score-0' onclick='toggleDiv(this)'>+65:             <span class="k">if</span> <span class="n">lower_point_response</span> <span class="o">&gt;=</span> <span class="n">point_response</span><span class="p">:</span></pre>
 <pre class='cython code score-0'>      __pyx_t_15 = ((__pyx_v_lower_point_response &gt;= __pyx_v_point_response) != 0);
       if (__pyx_t_15) {
-</pre><pre class='cython line score-2' onclick='toggleDiv(this)'>+66:                 <span class="n">accepted_points_index</span><span class="p">[</span><span class="n">point_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span></pre>
-<pre class='cython code score-2'>        if (unlikely(<span class='pyx_c_api'>__Pyx_SetItemInt</span>(__pyx_v_accepted_points_index, __pyx_v_point_index, Py_False, __pyx_t_5numpy_int_t, 1, __Pyx_PyInt_From_npy_long, 0, 1, 1) &lt; 0)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+</pre><pre class='cython line score-2' onclick='toggleDiv(this)'>+66:                 <span class="n">accepted_points_index</span><span class="p">[</span><span class="n">point_index</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0</span></pre>
+<pre class='cython code score-2'>        if (unlikely(<span class='pyx_c_api'>__Pyx_SetItemInt</span>(__pyx_v_accepted_points_index, __pyx_v_point_index, __pyx_int_0, __pyx_t_5numpy_int_t, 1, __Pyx_PyInt_From_npy_long, 0, 1, 1) &lt; 0)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class='cython line score-0' onclick='toggleDiv(this)'>+67:                 <span class="k">continue</span></pre>
 <pre class='cython code score-0'>        goto __pyx_L3_continue;
       }
@@ -726,8 +727,8 @@ __PYX_XDEC_MEMVIEW(&amp;__pyx_v_interest_point_coords, 1);
 </pre><pre class='cython line score-0' onclick='toggleDiv(this)'>+72:             <span class="k">if</span> <span class="n">upper_point_response</span> <span class="o">&gt;=</span> <span class="n">point_response</span><span class="p">:</span></pre>
 <pre class='cython code score-0'>      __pyx_t_15 = ((__pyx_v_upper_point_response &gt;= __pyx_v_point_response) != 0);
       if (__pyx_t_15) {
-</pre><pre class='cython line score-2' onclick='toggleDiv(this)'>+73:                 <span class="n">accepted_points_index</span><span class="p">[</span><span class="n">point_index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span></pre>
-<pre class='cython code score-2'>        if (unlikely(<span class='pyx_c_api'>__Pyx_SetItemInt</span>(__pyx_v_accepted_points_index, __pyx_v_point_index, Py_False, __pyx_t_5numpy_int_t, 1, __Pyx_PyInt_From_npy_long, 0, 1, 1) &lt; 0)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+</pre><pre class='cython line score-2' onclick='toggleDiv(this)'>+73:                 <span class="n">accepted_points_index</span><span class="p">[</span><span class="n">point_index</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0</span></pre>
+<pre class='cython code score-2'>        if (unlikely(<span class='pyx_c_api'>__Pyx_SetItemInt</span>(__pyx_v_accepted_points_index, __pyx_v_point_index, __pyx_int_0, __pyx_t_5numpy_int_t, 1, __Pyx_PyInt_From_npy_long, 0, 1, 1) &lt; 0)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
 </pre><pre class='cython line score-0' onclick='toggleDiv(this)'>+74:                 <span class="k">continue</span></pre>
 <pre class='cython code score-0'>        goto __pyx_L3_continue;
       }
@@ -738,8 +739,13 @@ __PYX_XDEC_MEMVIEW(&amp;__pyx_v_interest_point_coords, 1);
   }
 </pre><pre class='cython line score-0'>&#xA0;75: </pre>
 <pre class='cython line score-0'>&#xA0;76:     <span class="c"># Return only accepted points</span></pre>
-<pre class='cython line score-8' onclick='toggleDiv(this)'>+77:     <span class="k">return</span> <span class="n">cube_coordinates</span><span class="p">[</span><span class="n">accepted_points_index</span><span class="p">]</span></pre>
-<pre class='cython code score-8'>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+<pre class='cython line score-37' onclick='toggleDiv(this)'>+77:     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cube_coordinates</span><span class="p">[</span><span class="n">accepted_points_index</span><span class="p">])</span></pre>
+<pre class='cython code score-37'>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_np);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_1, __pyx_n_s_asarray);<span class='error_goto'> if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyIndex_AsSsize_t</span>(__pyx_v_accepted_points_index);<span class='error_goto'> if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) &amp;&amp; PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   __pyx_t_8 = -1;
   __pyx_t_22.data = __pyx_v_cube_coordinates.data;
@@ -762,9 +768,35 @@ __pyx_t_22.shape[0] = __pyx_v_cube_coordinates.shape[1];
 __pyx_t_22.strides[0] = __pyx_v_cube_coordinates.strides[1];
     __pyx_t_22.suboffsets[0] = -1;
 
-__pyx_t_4 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5numpy_int_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5numpy_int_t, 0);;<span class='error_goto'> if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
+__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_5numpy_int_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_5numpy_int_t, 0);;<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&amp;__pyx_t_22, 1);
+  __pyx_t_2 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON &amp;&amp; unlikely(<span class='py_c_api'>PyMethod_Check</span>(__pyx_t_3))) {
+    __pyx_t_2 = <span class='py_macro_api'>PyMethod_GET_SELF</span>(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = <span class='py_macro_api'>PyMethod_GET_FUNCTION</span>(__pyx_t_3);
+      <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_t_2);
+      <span class='pyx_macro_api'>__Pyx_INCREF</span>(function);
+      <span class='pyx_macro_api'>__Pyx_DECREF_SET</span>(__pyx_t_3, function);
+    }
+  }
+  if (!__pyx_t_2) {
+    __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_3, __pyx_t_1);<span class='error_goto'> if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
+  } else {
+    __pyx_t_23 = <span class='py_c_api'>PyTuple_New</span>(1+1);<span class='error_goto'> if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_23);
+    <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_23, 0, __pyx_t_2); <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_2); __pyx_t_2 = NULL;
+    <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_23, 0+1, __pyx_t_1);
+    <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_1);
+    __pyx_t_1 = 0;
+    __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_3, __pyx_t_23, NULL);<span class='error_goto'> if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_23); __pyx_t_23 = 0;
+  }
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
