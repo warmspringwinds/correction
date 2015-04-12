@@ -3,6 +3,8 @@
 #  with take_time('description'):
 #      func_call()
 
+from __future__ import print_function
+
 import contextlib
 import time
 
@@ -28,5 +30,5 @@ def take_time(desc):
     t0 = time.time()
     yield
     dt = time.time() - t0
-    print '%s took %s' % (desc, format_time(dt))
+    print('%s took %s' % (desc, format_time(dt)))
 
