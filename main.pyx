@@ -39,9 +39,9 @@ def get_scale_local_maximas_cython(cnp.ndarray[cnp.int_t, ndim=2] cube_coordinat
     array([[1, 0, 1]])
     """
  
-    cdef Py_ssize_t y_coord, x_coord, point_layer, point_index
+    cdef cnp.int_t y_coord, x_coord, point_layer, point_index
     cdef cnp.double_t point_response, lower_point_response, upper_point_response
-    cdef cnp.int_t[:, ::1] interest_point_coords
+    cdef cnp.int_t[::1] interest_point_coords
     cdef Py_ssize_t amount_of_layers = laplacian_cube.shape[2]
     cdef Py_ssize_t amount_of_points = cube_coordinates.shape[0]
  
